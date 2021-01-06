@@ -45,18 +45,17 @@ class User extends Authenticatable
 
     public function validateLogin(Request $request)
     {
-       
-       // else
-        //{
-            return DB::table('users')
-            ->where('name', $request->username)
-            ->where('password', $request->password)
-            ->get();
-       // }
+        return DB::table('users')
+        ->where('name', $request->username)
+        ->where('password', $request->password)
+        ->get();
+    }
 
-
-
-       
+    public function getAll($usertype)
+    {
+         return DB::table('users')
+        ->where('role', $usertype)
+        ->get();
     }
     
 }

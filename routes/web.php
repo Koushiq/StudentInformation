@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,9 @@ Route::middleware(['sess'])->group(function(){
         Route::get('/admin/home',function(){
             return view('home');
         });
+
+        Route::get('/admin/home/getAllStudents', [UserController::class, 'getAllStudents']);
+        
 
         Route::get('/student/home',function(){
             return view('student');
