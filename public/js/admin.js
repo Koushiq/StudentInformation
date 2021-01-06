@@ -1,9 +1,8 @@
 $(document).ready(function(){
-
-  
-
     getAllStudents();
-   
+    $("#mClose").click(function(){
+        $("#mErrLog").html('');
+    });
 });
 
 
@@ -33,7 +32,48 @@ getAllStudents = function(){
 
             $(".edit").click(function(){
                //
-               
+              
+               let studentId= this.id;
+               $("form").submit(function(e){
+                    $("#mErrLog").html('');
+                    e.preventDefault();
+                    let User = {
+                        firstname:$("#mFirstname").val(),
+                        lastname:$("#mLastname").val(),
+                        address:$("#mAddress").val(),
+                        picture:$("#mPicture").val(),
+                        department:$("#mDepartment").val(),
+                        dateofbirth:$("#mDob").val()
+                    }
+                    let res = validate(User);
+                    if(Object.keys(res).length==0)
+                    {
+                        $.ajax({
+                            url:"http://localhost:8000/admin/home/updateStudent",
+                            method:"PUT",
+                            data:{
+                                "id":studentId,
+                                "firstname":User.firstname,
+                                "lastname":User.lastname,
+                                "address":User.address,
+                                "picture"
+                            }
+                        })
+                    }
+                    else
+                    {
+                        let str = "";
+                        for (let key in User) {
+                            if(res[key+"Err"]!=undefined)
+                            {
+                                str += res[key+"Err"]+"<br>";
+                            }
+                            
+                        }
+                        $("#mErrLog").html(str);
+                    }
+
+               });
             });
 
             $(".delete").click(function(){
@@ -49,5 +89,16 @@ getAllStudents = function(){
     });
 }
 
+function validate(User)
+{
+    let errorLog =  {};
+    for (let key in User) {
+        
+        if(User[key]=="" || User[key]==undefined)
+        {
+            errorLog[key+"Err"]=key+" can not be empty";
+        }
 
-
+      }
+      return errorLog;
+}

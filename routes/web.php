@@ -44,7 +44,7 @@ Route::middleware(['sess'])->group(function(){
         });
 
         Route::get('/admin/home/getAllStudents', [UserController::class, 'getAllStudents']);
-        
+        Route::put('/admin/home/updateStudent', [UserController::class, 'updateStudent']);
 
         Route::get('/student/home',function(){
             return view('student');

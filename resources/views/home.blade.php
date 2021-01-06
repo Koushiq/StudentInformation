@@ -37,12 +37,6 @@
 </table>
 
 <div class="container">
-    <h2>Modal Example</h2>
-
-    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-      Open modal
-    </button> --}}
-  
     <div class="modal" id="editModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -54,18 +48,48 @@
           </div>
         
           <div class="modal-body">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <table class="table">
                     <tr>
                         <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Address</th>
-                        <th>Picture</th>
-                        <th>Department</th>
-                        <th>Date Of Birth</th>
+                        <td><input type="text" name="mFirstname" id="mFirstname"></td>
+                        
                     </tr>
                     <tr>
-                        <td><input type="text" name="mFirstname" id="mUsername"></td>
+                        <th>Lastname</th>
+                        <td><input type="text" name="mLastnaem" id="mLastname"></td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>
+                            <input type="text" name="mAddress" id="mAddress">
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <th>Picture</th>
+                       <td>
+                           <input type="file" name="mPicture" id="mPicture" enctype="multipart/form-data">
+                       </td>
+                    </tr>
+                    <tr>
+                        <th>Department</th>
+                        <td>
+                            <select name="mDepartment" id="mDepartment">
+                                <option value="English">English</option>
+                                <option value="CSE">CSE</option>
+                                <option value="Bangla">Bangla</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Date Of Birth</th>
+                        <td>
+                            <input type="date" name="mDob" id="mDob">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Update" id="update" name="update"></td>
                     </tr>
                 </table>
             </form>
@@ -73,9 +97,11 @@
           
          
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="mClose" data-dismiss="modal">Close</button>
           </div>
+          <div id="mErrLog">
 
+          </div>
         </div>
       </div>
     </div>
