@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    
+    return view('login');
+});
+
+Route::post('/',function(){
+    //return view('login');
+    return '<script>alert(0);</script>';
 });
