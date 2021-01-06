@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +18,34 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::post('/',function(){
-    //return view('login');
-    return '<script>alert(0);</script>';
+Route::post('/', [LoginController::class, 'verifyLogin']);
+
+Route::get('/admin',function(){
+
+    return redirect('/');
+
+});
+
+Route::get('/student',function(){
+
+    return redirect('/');
+});
+
+
+Route::middleware(['sess'])->group(function(){
+
+   
+
+    Route::group(['middleware'=>['role']],(function(){
+
+        Route::get('/admin/home',function(){
+            return view('home');
+        });
+
+        Route::get('/student/home',function(){
+            return view('student');
+        });
+
+    }));
+
 });
